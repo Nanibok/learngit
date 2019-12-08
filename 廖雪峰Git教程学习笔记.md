@@ -2,62 +2,98 @@
 
 ## 一.Git简介
 
-Git是目前世界上最先进的分布式版本控制系统（没有之一）。
+Git是目前世界上最先进的分布式版本控制系统
+
 版本控制系统：自动记录跟踪每次文件的改动，作一个文件快照，形成一个版本。
-分布式版本控制系统：每个人电脑里都有完整的版本库，不必联网，中央服务器主要用于交换团队的修改。
-Mercurial、Bazaar、BitKeeper、Git
-集中式的版本控制系统：版本库是集中存放在中央服务器，必须联网才能工作。
-CVS、SVN
+
+分布式版本控制系统：每个人电脑里都有完整的版本库，不必联网，中央服务器主要用于交换团队的修改，如：Mercurial、Bazaar、BitKeeper、Git
+
+集中式的版本控制系统：版本库是集中存放在中央服务器，必须联网才能工作，如：CVS、SVN
+
 历史：linux之父为了更好的管理他自己的开源项目linux系统而自己用C语言开发的分布式版本控制系统Git
 
-## 二.Git安装
+## 二.	Git安装
 
-### Linux上安装
+### 2.1	Linux上安装
 
 1.判断是否已安装Git
+
+```
 $ git
-2.否则
-Debian或Ubuntu Linux：
+```
+
+2否则
+
+Debian或Ubuntu Linux中
+
+```
 sudo apt-get install git
 或
 sudo apt-get install git-core（旧）
-其他：
+```
+
+其他
 从Git官网下载源码，解压，依次执行
+
+```
 ./config
 make
 sudo make install
+```
 
-Windows上安装Git
-1.从Git官网下载安装程序,直接安装（或https://gitee.com/git-installer/git-for-windows）
+### 2.2	Windows上安装
+
+1.从Git官网下载安装程序,直接安装
+
+下载地址：https://gitee.com/git-installer/git-for-windows
+
 2.配置
-$ git config --global user.name "Your Name"//名字
-$ git config --global user.email "email@example.com"//邮箱
+
+```
+$ git config --global user.name "Your Name"				//名字
+$ git config --global user.email "email@example.com"	 //邮箱
+```
 
 ## 三.创建版本库(repository/仓库/目录)
 
 1.选择一个合适的地方，创建一个空目录
+
+```
 $ mkdir learngit	//创建一个空文件夹（如果你使用Windows系统，为了避免遇到各种莫名其妙的问题，请确保目录名（包括父目录）不包含中文。）
 $ cd learngit	//移动到新文件夹
 $ pwd	//显示当前位置的路径
+```
+
 2.初始化目录，将其变成Git可以管理的仓库
+
+```
 $ git init	//初始化
-$ git ls -ah 	//罗列目录下的文件
-成功会自动创建.git文件夹，Git用来跟踪管理版本库
-所有的版本控制系统只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等
-无法跟踪图片、视频、Word等二进制文件的变化
-Windows自带记事本的文本文件开头有个0xefbbbf，可能编译错误，不推荐
+$ ls -ah 	//罗列目录下的文件
+```
 
-## 四.把文件添加到版本库(文件在同一文件夹)
+成功之后自动创建.git文件夹，以便通过Git跟踪管理版本库
 
-### 1.把文件添加到仓库
+注意：
 
-$ git add file	//反复多次使用，添加多个文件，把文件修改添加到暂存区
+所有的版本控制系统只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等；
+无法跟踪图片、视频、Word等二进制文件的变化；
+Windows自带记事本的文本文件开头有个0xefbbbf，可能会编译错误，导致无法跟踪；
 
-### 2.把文件提交到仓库
+## 四.	把文件添加到版本库
 
-$ git commit -m "description"	//一次提交，把暂存区的所有内容提交到当前分支
+### 4.1	把文件添加到仓库
 
-## 五.穿梭功能
+```
+$ git add (file_name)	//反复多次使用，添加多个文件，把文件修改添加到暂存区
+```
+
+### 4.2	把文件提交到仓库
+
+```
+$ git commit -m "(description)"	//一次提交，把暂存区的所有内容提交到当前分支
+```
+
+## 五.	穿梭功能
 
 ### 1.基本概念
 
@@ -105,28 +141,47 @@ $ git checkout -- file。//恢复错删文件
 
 Github-->Git远程仓库
 
-### SSH加密：
+### 6.1	SSH加密：
 
 1.创建SSH Key
+
+```
 $ ssh-keygen -t rsa -C "youremail@example.com"
+```
+
 2.登陆GitHub，打开“Account settings”，“SSH Keys”页面，
 点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容
 
-### 添加远程库：
+### 6.2	添加远程库：
 
 1.Github上创建repository
-2.本地仓库关联github的远程库
-$ git remote add origin git@github.com:用户名/远程仓库名.git
-3.把本地仓库的内容推送到GitHub仓库
-$ git push -u origin master
-4.推送最新修改
-$ git push origin master
 
-### 克隆远程库
+2.本地仓库关联github的远程库
+
+```
+$ git remote add origin git@github.com:用户名/远程仓库名.git
+```
+
+3.把本地仓库的内容推送到GitHub仓库
+
+```
+$ git push -u origin master
+```
+
+4.推送最新修改
+
+```
+$ git push origin master
+```
+
+### 6.3	克隆远程库
 
 1.确定Github上repository的地址
 2.克隆远程库到本地
+
+```
 $ git clone git@github.com:用户名/仓库名.git
+```
 
 ### 七.分支管理
 
@@ -166,8 +221,6 @@ $ git log --graph --pretty=oneline --abbrev-commit //查看分支合并图
 
 $ git merge --no-ff -m "merge with no-ff" dev 	
 //强制禁用Fast forward模式，，Git就会在merge时生成一个新的commit，从分支历史上就可以看出分支信息
-
-  
 
 ### 分支管理策略
 
